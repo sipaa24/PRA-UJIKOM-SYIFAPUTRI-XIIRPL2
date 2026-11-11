@@ -25,3 +25,5 @@ Thumbs.db
 !/storage/app/public/
 !/storage/app/public/alat/
 !/storage/app/public/alat/*
+# Windows Zone.Identifier artifacts
+*Zone.Identifier
