@@ -78,15 +78,15 @@
                 required
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-                <option value="peminjam" {{ $user->role == 'peminjam' ? 'selected' : '' }}>
+                <option value="peminjam" {{ old('role', $user->role) == 'peminjam' ? 'selected' : '' }}>
                     Peminjam
                 </option>
 
-                <option value="petugas" {{ $user->role == 'petugas' ? 'selected' : '' }}>
+                <option value="petugas" {{ old('role', $user->role) == 'petugas' ? 'selected' : '' }}>
                     Petugas
                 </option>
 
-                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>
+                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>
                     Admin
                 </option>
             </select>
@@ -114,10 +114,19 @@
 
             <!-- Foto Saat Ini -->
             @if($user->foto_profile)
+
+                @php
+                    if (str_starts_with($user->foto_profile, 'profile/')) {
+                        $fotoSaatIni = asset($user->foto_profile);
+                    } else {
+                        $fotoSaatIni = asset('storage/' . $user->foto_profile);
+                    }
+                @endphp
+
                 <div class="mb-3 flex items-center gap-3">
 
                     <img
-                        src="{{ asset($user->foto_profile) }}"
+                        src="{{ $fotoSaatIni }}"
                         alt="Foto {{ $user->name }}"
                         class="w-20 h-20 rounded-full object-cover border-2 border-gray-200 shadow-sm"
                     >
@@ -133,6 +142,21 @@
                     </div>
 
                 </div>
+
+            @else
+
+                <div class="mb-3 flex items-center gap-3">
+                    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center border-2 border-gray-200">
+                        <span class="text-2xl font-bold text-blue-600">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </span>
+                    </div>
+
+                    <p class="text-sm text-gray-500">
+                        Pengguna belum memiliki foto profil.
+                    </p>
+                </div>
+
             @endif
 
             <!-- Upload Foto Baru -->

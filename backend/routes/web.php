@@ -6,6 +6,7 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -82,9 +83,14 @@ Route::middleware(['auth', 'role:peminjam'])->prefix('peminjam')->name('peminjam
     Route::post('/store', [PeminjamController::class, 'ajukanPeminjaman'])->name('store');
     Route::post('/peminjaman/store', [PeminjamController::class, 'ajukanPeminjaman'])->name('peminjaman.store');
     
+    //hapus riwayat pinjam 
+    Route::delete('/riwayat/{id}', [PeminjamController::class, 'hapusRiwayat'])->name('riwayat.hapus');
+
     Route::get('/riwayat', [PeminjamController::class, 'riwayatPeminjaman'])->name('riwayat');
     Route::get('/peminjaman/riwayat', [PeminjamController::class, 'riwayatPeminjaman'])->name('peminjaman.riwayat');
 });
+
+
 
 // Route Tamu (Belum Login)
 Route::middleware('guest')->group(function () {
@@ -97,6 +103,19 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class,'register'])->name('register.store');
 });
 
+//route profile
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profil', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profil', [ProfileController::class, 'update'])
+        ->name('profile.update');
+});
+
+// Peminjam profile
+Route::middleware('auth')->group(function(){
+    Route::get('/profile', function () {return redirect()->route('profile.edit');})->name('profile');
+});
 
 // Route Logout (Harus sudah login)
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

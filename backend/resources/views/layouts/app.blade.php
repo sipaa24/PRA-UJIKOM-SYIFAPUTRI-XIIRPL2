@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -99,11 +100,54 @@
             </nav>
 
             {{-- Informasi Pengguna di Paling Bawah --}}
-            <div class="mt-auto p-4 border-t border-gray-800 text-sm text-gray-400">
+            <div class="p-4 text-sm text-gray-400">
                 Logged in as:
                 <span class="text-white font-semibold">
                     {{ auth()->user()->name }}
                 </span>
+            </div>
+
+            {{-- MENU PROFIL --}}
+            <div class="p-4 border-t border-gray-800">
+
+                <a href="{{ route('profile.edit') }}"
+                   class="block px-4 py-2 rounded-lg transition
+                   {{ request()->routeIs('profile.*') ? 'bg-gray-800 text-white font-medium' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+
+                    <div class="flex items-center gap-3">
+
+                        {{-- FOTO PROFIL --}}
+                        @if (auth()->user()->foto_profile)
+
+                            <img src="{{ asset('storage/' . auth()->user()->foto_profile) }}"
+                                 alt="Foto Profil"
+                                 class="w-9 h-9 rounded-full object-cover border border-gray-600">
+
+                        @else
+
+                            <div class="w-9 h-9 rounded-full bg-gray-700 flex items-center justify-center">
+                                <span class="text-sm font-bold">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                </span>
+                            </div>
+
+                        @endif
+
+                        {{-- INFORMASI PROFIL --}}
+                        <div>
+                            <p class="text-sm font-semibold">
+                                Profile Saya
+                            </p>
+
+                            <p class="text-xs text-gray-400">
+                                Lihat dan edit profil
+                            </p>
+                        </div>
+
+                    </div>
+
+                </a>
+
             </div>
 
         </aside>

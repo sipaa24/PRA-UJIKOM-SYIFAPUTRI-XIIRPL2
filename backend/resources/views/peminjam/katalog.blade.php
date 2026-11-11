@@ -106,6 +106,7 @@
             color: #1683d8;
         }
 
+        
         /* =====================================================
            CONTAINER
         ===================================================== */
@@ -719,6 +720,98 @@
                     {{ Auth::user()->name ?? Auth::user()->nama ?? 'Peminjam' }}
                 </strong>
             </div>
+
+         
+            <!-- =====================================================
+                PROFIL PEMINJAM
+            ===================================================== -->>
+            
+            {{-- PROFIL SAYA --}}
+            @php
+                $userLogin = Auth::user();
+                $fotoProfil = null;
+
+                if ($userLogin && $userLogin->foto_profile) {
+                    if (str_starts_with($userLogin->foto_profile, 'profile/')) {
+                        $fotoProfil = asset($userLogin->foto_profile);
+                    } else {
+                        $fotoProfil = asset('storage/' . $userLogin->foto_profile);
+                    }
+                }
+            @endphp
+
+            <a href="{{ route('profile.edit') }}"
+            style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap:8px;
+                height:36px;
+                padding:0 12px;
+                background:#edf6ff;
+                border:1px solid #cfe5fa;
+                border-radius:9px;
+                text-decoration:none;
+                color:#315578;
+                box-sizing:border-box;
+                white-space:nowrap;
+            ">
+
+                @if($fotoProfil)
+                    <img
+                        src="{{ $fotoProfil }}"
+                        alt="Foto Profil"
+                        style="
+                            width:27px;
+                            height:27px;
+                            border-radius:50%;
+                            object-fit:cover;
+                        "
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+
+                    <div style="
+                        width:27px;
+                        height:27px;
+                        border-radius:50%;
+                        background:#1683d8;
+                        color:white;
+                        display:none;
+                        align-items:center;
+                        justify-content:center;
+                        font-weight:bold;
+                        font-size:12px;
+                    ">
+                        {{ strtoupper(substr($userLogin->name, 0, 1)) }}
+                    </div>
+                @else
+                    <div style="
+                        width:27px;
+                        height:27px;
+                        border-radius:50%;
+                        background:#1683d8;
+                        color:white;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-weight:bold;
+                        font-size:12px;
+                    ">
+                        {{ strtoupper(substr($userLogin->name, 0, 1)) }}
+                    </div>
+                @endif
+
+                <div style="line-height:1.3;">
+                    <div style="font-size:11px;font-weight:700;">
+                        Profil Saya
+                    </div>
+                    <div style="font-size:9px;color:#7890a8;">
+                        Lihat dan edit profil
+                    </div>
+                </div>
+
+                <span style="color:#1683d8;font-weight:bold;">›</span>
+            </a>
 
             <!-- =================================================
                  RIWAYAT PINJAM

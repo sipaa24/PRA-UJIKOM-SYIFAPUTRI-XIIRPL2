@@ -8,9 +8,7 @@
     <title>Riwayat Peminjaman</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -19,8 +17,7 @@
             color: #173b68;
         }
 
-        /* ================= HEADER ================= */
-
+        /* HEADER */
         .header {
             height: 70px;
             background: linear-gradient(90deg, #0878d1, #2398ed);
@@ -74,16 +71,14 @@
             color: #1683d8;
         }
 
-        /* ================= CONTAINER ================= */
-
+        /* CONTAINER */
         .container {
             max-width: 1320px;
             margin: auto;
             padding: 28px 30px 35px;
         }
 
-        /* ================= HERO ================= */
-
+        /* HERO */
         .hero {
             background: white;
             border-radius: 18px;
@@ -139,8 +134,7 @@
             top: 5px;
         }
 
-        /* ================= STATISTIK ================= */
-
+        /* STATISTIK */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -191,21 +185,10 @@
             font-weight: bold;
         }
 
-        .icon-blue {
-            background: #168be4;
-        }
-
-        .icon-green {
-            background: #16b878;
-        }
-
-        .icon-orange {
-            background: #f3a11d;
-        }
-
-        .icon-red {
-            background: #e65050;
-        }
+        .icon-blue { background: #168be4; }
+        .icon-green { background: #16b878; }
+        .icon-orange { background: #f3a11d; }
+        .icon-red { background: #e65050; }
 
         .stat-label {
             font-size: 11px;
@@ -226,8 +209,7 @@
             margin-left: 3px;
         }
 
-        /* ================= CARD ================= */
-
+        /* CARD */
         .card {
             background: white;
             border: 1px solid #dcecff;
@@ -236,8 +218,7 @@
             box-shadow: 0 5px 20px rgba(35, 100, 160, .07);
         }
 
-        /* ================= SEARCH ================= */
-
+        /* SEARCH */
         .filter-area {
             display: flex;
             gap: 10px;
@@ -270,9 +251,7 @@
             font-size: 12px;
         }
 
-        .search-input {
-            padding: 0 15px 0 40px;
-        }
+        .search-input { padding: 0 15px 0 40px; }
 
         .date-filter {
             width: 190px;
@@ -285,8 +264,7 @@
             box-shadow: 0 0 0 3px rgba(36, 147, 232, .09);
         }
 
-        /* ================= TABLE ================= */
-
+        /* TABLE */
         .table-wrapper {
             overflow-x: auto;
             border: 1px solid #dcecff;
@@ -321,34 +299,21 @@
             vertical-align: middle;
         }
 
-        tbody tr {
-            transition: .15s;
-        }
-
-        tbody tr:hover {
-            background: #f8fcff;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* ================= ID ================= */
+        tbody tr { transition: .15s; }
+        tbody tr:hover { background: #f8fcff; }
+        tbody tr:last-child td { border-bottom: none; }
 
         .id-number {
             font-weight: 700;
             color: #214b79;
         }
 
-        /* ================= DATE ================= */
-
         .date-main {
             color: #315a86;
             font-weight: 600;
         }
 
-        /* ================= ALAT ================= */
-
+        /* ALAT */
         .alat-list {
             display: flex;
             flex-direction: column;
@@ -396,8 +361,7 @@
             margin-right: 5px;
         }
 
-        /* ================= STATUS ================= */
-
+        /* STATUS */
         .status {
             display: inline-flex;
             align-items: center;
@@ -442,8 +406,23 @@
             color: #687b8f;
         }
 
-        /* ================= EMPTY ================= */
+        .btn-hapus {
+            margin-top: 9px;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
 
+        .btn-hapus:hover {
+            background: #fecaca;
+        }
+
+        /* EMPTY */
         .empty {
             text-align: center;
             padding: 55px 20px;
@@ -463,8 +442,7 @@
             font-size: 28px;
         }
 
-        /* ================= BOTTOM ================= */
-
+        /* BOTTOM */
         .bottom-info {
             display: flex;
             align-items: center;
@@ -500,63 +478,27 @@
             font-size: 12px;
         }
 
-        /* ================= RESPONSIVE ================= */
-
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero {
-                padding: 20px;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .hero { padding: 20px; }
+            .container { padding: 20px 15px; }
         }
 
         @media (max-width: 600px) {
-
-            .header {
-                padding: 0 15px;
-            }
-
-            .header-title {
-                font-size: 17px;
-            }
-
+            .header { padding: 0 15px; }
+            .header-title { font-size: 17px; }
             .header-icon {
                 width: 32px;
                 height: 32px;
                 font-size: 17px;
             }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .page-title {
-                font-size: 23px;
-            }
-
-            .page-subtitle {
-                font-size: 11px;
-            }
-
-            .hero-decoration {
-                display: none;
-            }
-
-            .filter-area {
-                flex-direction: column;
-            }
-
-            .date-filter {
-                width: 100%;
-            }
-
+            .stats { grid-template-columns: 1fr; }
+            .page-title { font-size: 23px; }
+            .page-subtitle { font-size: 11px; }
+            .hero-decoration { display: none; }
+            .filter-area { flex-direction: column; }
+            .date-filter { width: 100%; }
             .bottom-info {
                 flex-direction: column;
                 align-items: flex-start;
@@ -568,228 +510,139 @@
 
 <body>
 
-    <!-- ================= HEADER ================= -->
-
+    <!-- HEADER -->
     <div class="header">
 
         <div class="header-title">
-
-            <div class="header-icon">
-                💼
-            </div>
-
+            <div class="header-icon">💼</div>
             Panel Peminjam
-
         </div>
 
         <div class="header-menu">
-
             <a href="{{ url('/peminjam/katalog') }}">
                 ▦ &nbsp; Katalog Alat
             </a>
-
         </div>
 
     </div>
 
-
-    <!-- ================= CONTENT ================= -->
-
+    <!-- CONTENT -->
     <div class="container">
 
-        <!-- ================= HERO ================= -->
-
+        <!-- HERO -->
         <div class="hero">
 
             <div class="hero-left">
 
-                <div class="history-icon">
-                    ↻
-                </div>
+                <div class="history-icon">↻</div>
 
                 <div>
-
-                    <h1 class="page-title">
-                        Riwayat Peminjaman
-                    </h1>
+                    <h1 class="page-title">Riwayat Peminjaman</h1>
 
                     <p class="page-subtitle">
                         Berikut adalah daftar riwayat peminjaman alat Anda.
                     </p>
-
                 </div>
 
             </div>
 
-            <div class="hero-decoration">
-                📋
-            </div>
+            <div class="hero-decoration">📋</div>
 
         </div>
 
-
-        <!-- ================= HITUNG STATISTIK ================= -->
-
+        <!-- HITUNG STATISTIK -->
         @php
 
             $totalPeminjaman = $peminjaman->count();
 
             $totalSelesai = $peminjaman->filter(function ($item) {
-
                 $status = strtolower(trim($item->status ?? ''));
 
-                return in_array($status, [
-                    'selesai',
-                    'dikembalikan'
-                ]);
-
+                return in_array($status, ['selesai', 'dikembalikan']);
             })->count();
-
 
             $totalDipinjam = $peminjaman->filter(function ($item) {
-
-                $status = strtolower(trim($item->status ?? ''));
-
-                return $status === 'dipinjam';
-
+                return strtolower(trim($item->status ?? '')) === 'dipinjam';
             })->count();
 
-
-            /*
-             * PENTING:
-             * Database kamu memiliki status "telat".
-             * Jadi "telat" DAN "terlambat" dihitung sebagai terlambat.
-             */
-
             $totalTerlambat = $peminjaman->filter(function ($item) {
-
                 $status = strtolower(trim($item->status ?? ''));
 
-                return in_array($status, [
-                    'telat',
-                    'terlambat'
-                ]);
-
+                return in_array($status, ['telat', 'terlambat']);
             })->count();
 
         @endphp
 
-
-        <!-- ================= STATISTIK ================= -->
-
+        <!-- STATISTIK -->
         <div class="stats">
 
-            <!-- TOTAL -->
-
             <div class="stat-card stat-blue">
-
-                <div class="stat-icon icon-blue">
-                    ▣
-                </div>
-
+                <div class="stat-icon icon-blue">▣</div>
                 <div>
-
-                    <div class="stat-label">
-                        Total Peminjaman
-                    </div>
-
+                    <div class="stat-label">Total Peminjaman</div>
                     <div class="stat-number">
                         {{ $totalPeminjaman }}
                         <span>kali</span>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <!-- SELESAI -->
-
             <div class="stat-card stat-green">
-
-                <div class="stat-icon icon-green">
-                    ✓
-                </div>
-
+                <div class="stat-icon icon-green">✓</div>
                 <div>
-
-                    <div class="stat-label">
-                        Selesai
-                    </div>
-
+                    <div class="stat-label">Selesai</div>
                     <div class="stat-number">
                         {{ $totalSelesai }}
                         <span>kali</span>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <!-- DIPINJAM -->
-
             <div class="stat-card stat-orange">
-
-                <div class="stat-icon icon-orange">
-                    ◷
-                </div>
-
+                <div class="stat-icon icon-orange">◷</div>
                 <div>
-
-                    <div class="stat-label">
-                        Dipinjam
-                    </div>
-
+                    <div class="stat-label">Dipinjam</div>
                     <div class="stat-number">
                         {{ $totalDipinjam }}
                         <span>kali</span>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <!-- TERLAMBAT -->
-
             <div class="stat-card stat-red">
-
-                <div class="stat-icon icon-red">
-                    !
-                </div>
-
+                <div class="stat-icon icon-red">!</div>
                 <div>
-
-                    <div class="stat-label">
-                        Terlambat
-                    </div>
-
+                    <div class="stat-label">Terlambat</div>
                     <div class="stat-number">
                         {{ $totalTerlambat }}
                         <span>kali</span>
                     </div>
-
                 </div>
-
             </div>
 
         </div>
 
-
-        <!-- ================= TABLE CARD ================= -->
-
+        <!-- TABLE CARD -->
         <div class="card">
 
-            <!-- SEARCH -->
+            <!-- NOTIFIKASI -->
+            @if(session('success'))
+                <div style="padding:12px;margin-bottom:12px;background:#ddf8ed;color:#087c50;border:1px solid #b8ebd5;border-radius:8px;font-size:12px;">
+                    {{ session('success') }}
+                </div>
+            @endif
 
+            @if(session('error'))
+                <div style="padding:12px;margin-bottom:12px;background:#ffe7e7;color:#c62828;border:1px solid #ffcaca;border-radius:8px;font-size:12px;">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <!-- SEARCH -->
             <div class="filter-area">
 
                 <div class="search-wrapper">
-
-                    <span class="search-icon">
-                        🔍
-                    </span>
+                    <span class="search-icon">🔍</span>
 
                     <input
                         type="text"
@@ -798,9 +651,7 @@
                         placeholder="Cari nama alat, tanggal, atau status..."
                         autocomplete="off"
                     >
-
                 </div>
-
 
                 <input
                     type="date"
@@ -810,53 +661,29 @@
 
             </div>
 
-
-            <!-- ================= DATA KOSONG ================= -->
-
+            <!-- DATA KOSONG -->
             @if ($peminjaman->isEmpty())
 
                 <div class="empty">
-
-                    <div class="empty-icon">
-                        📋
-                    </div>
-
+                    <div class="empty-icon">📋</div>
                     Belum ada riwayat peminjaman.
-
                 </div>
 
             @else
 
-                <!-- ================= TABLE ================= -->
-
+                <!-- TABLE -->
                 <div class="table-wrapper">
 
                     <table>
 
                         <thead>
-
                             <tr>
-
-                                <th width="65">
-                                    #
-                                </th>
-
-                                <th width="140">
-                                    📅 &nbsp; Tanggal
-                                </th>
-
-                                <th>
-                                    🔧 &nbsp; Alat
-                                </th>
-
-                                <th width="150">
-                                    ⚙ &nbsp; Status
-                                </th>
-
+                                <th width="65">#</th>
+                                <th width="140">📅 &nbsp; Tanggal</th>
+                                <th>🔧 &nbsp; Alat</th>
+                                <th width="190">⚙ &nbsp; Status</th>
                             </tr>
-
                         </thead>
-
 
                         <tbody id="historyTableBody">
 
@@ -864,13 +691,26 @@
 
                                 @php
 
-                                    $status = strtolower(
-                                        trim($item->status ?? '')
-                                    );
+                                    $status = strtolower(trim($item->status ?? ''));
 
+                                    // Cek apakah ada barang yang sudah dihapus admin
+                                    $barangDihapus = $item->detailPinjam->contains(function ($detail) {
+                                        return $detail->alat === null;
+                                    });
+
+                                    // Cek status selesai
+                                    $sudahSelesai = in_array($status, [
+                                        'selesai',
+                                        'dikembalikan'
+                                    ]);
+
+                                    // Tombol hapus hanya untuk kondisi yang diizinkan
+                                    $bolehHapus = $sudahSelesai || $barangDihapus;
+
+                                    // Data pencarian
                                     $namaAlatSearch = $item->detailPinjam
                                         ->map(function ($detail) {
-                                            return $detail->alat->nama_alat ?? '';
+                                            return $detail->alat->nama_alat ?? 'Barang sudah dihapus admin';
                                         })
                                         ->implode(' ');
 
@@ -883,7 +723,6 @@
 
                                 @endphp
 
-
                                 <tr
                                     class="history-row"
                                     data-search="{{ $searchData }}"
@@ -891,29 +730,20 @@
                                 >
 
                                     <!-- ID -->
-
                                     <td>
-
                                         <span class="id-number">
                                             {{ $item->id }}
                                         </span>
-
                                     </td>
 
-
                                     <!-- TANGGAL -->
-
                                     <td>
-
                                         <div class="date-main">
                                             {{ $item->created_at?->format('d-m-Y') ?? '-' }}
                                         </div>
-
                                     </td>
 
-
                                     <!-- ALAT -->
-
                                     <td>
 
                                         <div class="alat-list">
@@ -922,101 +752,46 @@
 
                                                 @php
 
-                                                    $namaAlat =
-                                                        $detail->alat->nama_alat
-                                                        ?? 'Alat tidak ditemukan';
+                                                    $alatDihapus = $detail->alat === null;
 
-                                                    $namaLower =
-                                                        strtolower($namaAlat);
+                                                    $namaAlat = $alatDihapus
+                                                        ? 'Barang sudah dihapus admin'
+                                                        : $detail->alat->nama_alat;
 
+                                                    $namaLower = strtolower($namaAlat);
 
-                                                    if (
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'router'
-                                                        )
-                                                    ) {
-
-                                                        $foto =
-                                                            'https://commons.wikimedia.org/wiki/Special:FilePath/Mikrotik%20Wireless%20Router%202.jpg';
-
+                                                    if ($alatDihapus) {
+                                                        $foto = 'https://placehold.co/46x42/f3f8fc/dc2626?text=Hapus';
+                                                    } elseif (str_contains($namaLower, 'router')) {
+                                                        $foto = 'https://commons.wikimedia.org/wiki/Special:FilePath/Mikrotik%20Wireless%20Router%202.jpg';
                                                     } elseif (
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'kamera'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'camera'
-                                                        )
+                                                        str_contains($namaLower, 'kamera') ||
+                                                        str_contains($namaLower, 'camera')
                                                     ) {
-
-                                                        $foto =
-                                                            'https://commons.wikimedia.org/wiki/Special:FilePath/Canon%20EOS%203000D%20CNE.jpg';
-
+                                                        $foto = 'https://commons.wikimedia.org/wiki/Special:FilePath/Canon%20EOS%203000D%20CNE.jpg';
                                                     } elseif (
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'mini pc'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'intel nuc'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'nuc'
-                                                        )
+                                                        str_contains($namaLower, 'mini pc') ||
+                                                        str_contains($namaLower, 'intel nuc') ||
+                                                        str_contains($namaLower, 'nuc')
                                                     ) {
-
-                                                        $foto =
-                                                            'https://commons.wikimedia.org/wiki/Special:FilePath/Intel%20NUC%20Mini%20PC.jpg';
-
+                                                        $foto = 'https://commons.wikimedia.org/wiki/Special:FilePath/Intel%20NUC%20Mini%20PC.jpg';
                                                     } elseif (
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'tang'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'crimping'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'crimp'
-                                                        )
+                                                        str_contains($namaLower, 'tang') ||
+                                                        str_contains($namaLower, 'crimping') ||
+                                                        str_contains($namaLower, 'crimp')
                                                     ) {
-
-                                                        $foto =
-                                                            'https://commons.wikimedia.org/wiki/Special:FilePath/CrimpZangeRJ.jpg';
-
+                                                        $foto = 'https://commons.wikimedia.org/wiki/Special:FilePath/CrimpZangeRJ.jpg';
                                                     } elseif (
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'adapter'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'hdmi'
-                                                        ) ||
-                                                        str_contains(
-                                                            $namaLower,
-                                                            'vga'
-                                                        )
+                                                        str_contains($namaLower, 'adapter') ||
+                                                        str_contains($namaLower, 'hdmi') ||
+                                                        str_contains($namaLower, 'vga')
                                                     ) {
-
-                                                        $foto =
-                                                            'https://commons.wikimedia.org/wiki/Special:FilePath/HDMI%E8%BD%89VGA%E8%BD%89%E6%8E%A5%E9%A0%AD.jpg';
-
+                                                        $foto = 'https://commons.wikimedia.org/wiki/Special:FilePath/HDMI%E8%BD%89VGA%E8%BD%89%E6%8E%A5%E9%A0%AD.jpg';
                                                     } else {
-
-                                                        $foto =
-                                                            'https://placehold.co/46x42/f3f8fc/7890a8?text=Alat';
-
+                                                        $foto = 'https://placehold.co/46x42/f3f8fc/7890a8?text=Alat';
                                                     }
 
                                                 @endphp
-
 
                                                 <div class="alat-item">
 
@@ -1028,29 +803,35 @@
                                                         onerror="this.onerror=null;this.src='https://placehold.co/46x42/f3f8fc/7890a8?text=Alat';"
                                                     >
 
-
                                                     <div class="alat-info">
 
-                                                        <div class="alat-name">
+                                                        <div
+                                                            class="alat-name"
+                                                            style="{{ $alatDihapus ? 'color:#dc2626;' : '' }}"
+                                                        >
                                                             {{ $namaAlat }}
                                                         </div>
 
-                                                        <div class="alat-quantity">
-
-                                                            <span class="alat-dot"></span>
-
-                                                            {{ $detail->jumlah ?? 0 }} unit
-
-                                                        </div>
+                                                        @if($alatDihapus)
+                                                            <div style="font-size:10px;color:#dc2626;margin-top:3px;">
+                                                                Data alat sudah dihapus oleh admin.
+                                                            </div>
+                                                        @else
+                                                            <div class="alat-quantity">
+                                                                <span class="alat-dot"></span>
+                                                                {{ $detail->jumlah ?? 0 }} unit
+                                                            </div>
+                                                        @endif
 
                                                     </div>
 
                                                 </div>
 
-
                                             @empty
 
-                                                -
+                                                <span style="color:#dc2626;">
+                                                    Detail barang tidak tersedia.
+                                                </span>
 
                                             @endforelse
 
@@ -1058,50 +839,67 @@
 
                                     </td>
 
-
                                     <!-- STATUS -->
-
                                     <td>
 
-                                        @if ($status === 'dipinjam')
+                                        @if($status === 'dipinjam')
 
                                             <span class="status status-dipinjam">
                                                 Dipinjam
                                             </span>
 
-
-                                        @elseif ($status === 'diajukan')
+                                        @elseif($status === 'diajukan')
 
                                             <span class="status status-diajukan">
                                                 Diajukan
                                             </span>
 
-
-                                        @elseif (
-                                            $status === 'dikembalikan' ||
-                                            $status === 'selesai'
-                                        )
+                                        @elseif(in_array($status, ['dikembalikan', 'selesai']))
 
                                             <span class="status status-selesai">
                                                 Selesai
                                             </span>
 
-
-                                        @elseif (
-                                            $status === 'telat' ||
-                                            $status === 'terlambat'
-                                        )
+                                        @elseif(in_array($status, ['telat', 'terlambat']))
 
                                             <span class="status status-terlambat">
                                                 Terlambat
                                             </span>
-
 
                                         @else
 
                                             <span class="status status-lain">
                                                 {{ $item->status ?? '-' }}
                                             </span>
+
+                                        @endif
+
+                                        @if($barangDihapus)
+                                            <div style="font-size:10px;color:#dc2626;margin-top:7px;">
+                                                Barang dihapus admin
+                                            </div>
+                                        @endif
+
+                                        <!-- TOMBOL HAPUS -->
+                                        @if($bolehHapus)
+
+                                            <form
+                                                action="{{ route('peminjam.riwayat.hapus', $item->id) }}"
+                                                method="POST"
+                                                style="margin-top:9px;"
+                                                onsubmit="return confirm('Yakin ingin menghapus riwayat peminjaman ini?')"
+                                            >
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn-hapus"
+                                                >
+                                                    🗑 Hapus Riwayat
+                                                </button>
+
+                                            </form>
 
                                         @endif
 
@@ -1115,33 +913,20 @@
 
                     </table>
 
-
-                    <!-- ================= HASIL PENCARIAN ================= -->
-
-                    <div
-                        class="no-search"
-                        id="noSearch"
-                    >
+                    <!-- HASIL PENCARIAN -->
+                    <div class="no-search" id="noSearch">
                         Tidak ada riwayat yang sesuai dengan pencarian.
                     </div>
 
                 </div>
 
-
-                <!-- ================= BOTTOM ================= -->
-
+                <!-- BOTTOM -->
                 <div class="bottom-info">
 
                     <div class="info-text">
-
-                        <div class="info-icon">
-                            i
-                        </div>
-
+                        <div class="info-icon">i</div>
                         Riwayat ini menunjukkan semua peminjaman alat yang pernah Anda ajukan.
-
                     </div>
-
 
                     <div>
                         Sistem Peminjaman Alat
@@ -1155,116 +940,59 @@
 
     </div>
 
-
-    <!-- ================= JAVASCRIPT ================= -->
-
+    <!-- JAVASCRIPT -->
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
 
-            const searchInput =
-                document.getElementById('searchInput');
-
-            const dateFilter =
-                document.getElementById('dateFilter');
-
-            const rows =
-                document.querySelectorAll('.history-row');
-
-            const noSearch =
-                document.getElementById('noSearch');
-
+            const searchInput = document.getElementById('searchInput');
+            const dateFilter = document.getElementById('dateFilter');
+            const rows = document.querySelectorAll('.history-row');
+            const noSearch = document.getElementById('noSearch');
 
             function filterHistory() {
 
-                const keyword =
-                    searchInput.value
-                        .toLowerCase()
-                        .trim();
-
-                const selectedDate =
-                    dateFilter.value;
+                const keyword = searchInput.value.toLowerCase().trim();
+                const selectedDate = dateFilter.value;
 
                 let found = 0;
 
-
                 rows.forEach(function (row) {
 
-                    const searchData =
-                        row.dataset.search
-                            .toLowerCase();
-
-                    const rowDate =
-                        row.dataset.date;
-
+                    const searchData = row.dataset.search.toLowerCase();
+                    const rowDate = row.dataset.date;
 
                     const matchKeyword =
-                        keyword === '' ||
-                        searchData.includes(keyword);
-
+                        keyword === '' || searchData.includes(keyword);
 
                     const matchDate =
-                        selectedDate === '' ||
-                        rowDate === selectedDate;
+                        selectedDate === '' || rowDate === selectedDate;
 
-
-                    if (
-                        matchKeyword &&
-                        matchDate
-                    ) {
-
+                    if (matchKeyword && matchDate) {
                         row.style.display = '';
-
                         found++;
-
                     } else {
-
                         row.style.display = 'none';
-
                     }
 
                 });
 
-
-                if (
-                    found === 0 &&
-                    rows.length > 0
-                ) {
-
-                    noSearch.style.display = 'block';
-
-                } else {
-
-                    noSearch.style.display = 'none';
-
+                if (noSearch) {
+                    noSearch.style.display =
+                        found === 0 && rows.length > 0 ? 'block' : 'none';
                 }
 
             }
 
-
             if (searchInput) {
-
-                searchInput.addEventListener(
-                    'input',
-                    filterHistory
-                );
-
+                searchInput.addEventListener('input', filterHistory);
             }
 
-
             if (dateFilter) {
-
-                dateFilter.addEventListener(
-                    'change',
-                    filterHistory
-                );
-
+                dateFilter.addEventListener('change', filterHistory);
             }
 
         });
-
     </script>
 
 </body>
-
 </html>

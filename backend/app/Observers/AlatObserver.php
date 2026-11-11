@@ -10,7 +10,7 @@ class AlatObserver
     public function created(Alat $alat)
     {
         LogAktivitas::create([
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id() ?? \App\Models\User::where('role', 'admin')->value('id'),
             'aktivitas' => "Menambahkan data alat baru: '{$alat->nama_alat}' (Stok: {$alat->stok}, Kondisi: {$alat->status_kondisi}).",
         ]);
     }

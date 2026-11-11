@@ -284,7 +284,8 @@ class AdminController extends Controller
             ->with('success', 'Kategori berhasil dihapus.');
     }
 
-       // ==========================================
+    
+    // ==========================================
     // USER MANAGEMENT
     // ==========================================
 
@@ -314,11 +315,14 @@ class AdminController extends Controller
         return view('admin.user.index', compact('users', 'search'));
     }
 
+
     public function createUser()
     {
         return view('admin.user.create');
     }
 
+
+    // MENAMBAHKAN USER
     public function storeUser(Request $request)
     {
         $request->validate([
@@ -338,18 +342,10 @@ class AdminController extends Controller
             'no_hp' => $request->no_hp,
         ];
 
+        // Simpan foto ke folder yang sama dengan Profil Saya
         if ($request->hasFile('foto_profile')) {
-            $folder = public_path('profile');
-
-            if (!file_exists($folder)) {
-                mkdir($folder, 0755, true);
-            }
-
-            $file = $request->file('foto_profile');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move($folder, $filename);
-
-            $data['foto_profile'] = 'profile/' . $filename;
+            $data['foto_profile'] = $request->file('foto_profile')
+                ->store('foto-profil', 'public');
         }
 
         User::create($data);
@@ -358,6 +354,8 @@ class AdminController extends Controller
             ->with('success', 'User berhasil ditambahkan.');
     }
 
+
+    // HALAMAN EDIT USER
     public function editUser($id)
     {
         $user = User::findOrFail($id);
@@ -365,6 +363,8 @@ class AdminController extends Controller
         return view('admin.user.edit', compact('user'));
     }
 
+
+    // MEMPERBARUI USER
     public function updateUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -389,23 +389,15 @@ class AdminController extends Controller
             $data['password'] = bcrypt($request->password);
         }
 
+        // Jika ada foto baru, hapus foto lama lalu simpan foto baru
         if ($request->hasFile('foto_profile')) {
-            if ($user->foto_profile &&
-                file_exists(public_path($user->foto_profile))) {
-                unlink(public_path($user->foto_profile));
+
+            if ($user->foto_profile) {
+                Storage::disk('public')->delete($user->foto_profile);
             }
 
-            $folder = public_path('profile');
-
-            if (!file_exists($folder)) {
-                mkdir($folder, 0755, true);
-            }
-
-            $file = $request->file('foto_profile');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move($folder, $filename);
-
-            $data['foto_profile'] = 'profile/' . $filename;
+            $data['foto_profile'] = $request->file('foto_profile')
+                ->store('foto-profil', 'public');
         }
 
         $user->update($data);
@@ -414,44 +406,41 @@ class AdminController extends Controller
             ->with('success', 'Data user berhasil diperbarui.');
     }
 
-    
-public function destroyUser($id)
-{
-    $user = User::findOrFail($id);
 
-    // Admin tidak boleh dihapus
-    if ($user->role === 'admin') {
+    // MENGHAPUS USER
+    public function destroyUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        // Admin tidak boleh dihapus
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.user.index')
+                ->with('error', 'User dengan role Admin tidak dapat dihapus.');
+        }
+
+        // Cek apakah user masih memiliki peminjaman aktif
+        $masihMeminjam = Peminjaman::where('user_id', $user->id)
+            ->whereIn('status', ['dipinjam', 'telat'])
+            ->exists();
+
+        if ($masihMeminjam) {
+            return redirect()->route('admin.user.index')
+                ->with(
+                    'error',
+                    'User tidak dapat dihapus karena masih memiliki peminjaman alat yang belum dikembalikan.'
+                );
+        }
+
+        // Hapus foto profil
+        if ($user->foto_profile) {
+            Storage::disk('public')->delete($user->foto_profile);
+        }
+
+        $user->delete();
+
         return redirect()->route('admin.user.index')
-            ->with('error', 'User dengan role Admin tidak dapat dihapus.');
+            ->with('success', 'User berhasil dihapus.');
     }
-
-    // Cek apakah user masih memiliki peminjaman aktif
-    $masihMeminjam = Peminjaman::where('user_id', $user->id)
-        ->whereIn('status', ['dipinjam', 'telat'])
-        ->exists();
-
-    if ($masihMeminjam) {
-        return redirect()->route('admin.user.index')
-            ->with(
-                'error',
-                'User tidak dapat dihapus karena masih memiliki peminjaman alat yang belum dikembalikan.'
-            );
-    }
-
-    // Hapus foto profil jika ada
-    if (
-        $user->foto_profile &&
-        file_exists(public_path($user->foto_profile))
-    ) {
-        unlink(public_path($user->foto_profile));
-    }
-
-    // Hapus user
-    $user->delete();
-
-    return redirect()->route('admin.user.index')
-        ->with('success', 'User berhasil dihapus.');
-}
 
     // ==========================================
     // TRANSAKSI PEMINJAMAN
@@ -462,11 +451,15 @@ public function destroyUser($id)
         $search = $request->input('search');
 
         $peminjaman = Peminjaman::with(['user', 'detailPinjam.alat'])
+            // Sembunyikan data yang sudah "dihapus" admin, tapi tetap ada untuk riwayat peminjam
+            ->where('dihapus_admin', false)
             ->when($search, function ($query, $search) {
-                return $query->where('status', 'like', "%{$search}%")
-                    ->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    });
+                return $query->where(function ($q) use ($search) {
+                    $q->where('status', 'like', "%{$search}%")
+                        ->orWhereHas('user', function ($q2) use ($search) {
+                            $q2->where('name', 'like', "%{$search}%");
+                        });
+                });
             })
             ->latest()
             ->paginate(10)
@@ -576,18 +569,23 @@ public function destroyUser($id)
 
     public function destroyPeminjaman($id)
     {
-        $peminjaman = Peminjaman::with('detailPinjam')->findOrFail($id);
+        $peminjaman = Peminjaman::findOrFail($id);
 
-        if ($peminjaman->status === 'dipinjam') {
-            foreach ($peminjaman->detailPinjam as $detail) {
-                $detail->alat->increment('stok', $detail->jumlah);
-            }
+        // Hanya peminjaman yang sudah selesai yang boleh dihapus dari daftar admin.
+        $status = strtolower(trim($peminjaman->status ?? ''));
+
+        if (! in_array($status, ['selesai', 'dikembalikan'])) {
+            return redirect()->route('admin.peminjaman.index')
+                ->with('error', 'Hanya data peminjaman yang sudah selesai yang dapat dihapus.');
         }
 
-        $peminjaman->delete();
+        // Jangan hapus permanen: cukup sembunyikan dari daftar admin.
+        // Data peminjaman, detail alat, dan pengembalian tetap tersimpan
+        // sehingga riwayat peminjam tidak ikut hilang.
+        $peminjaman->update(['dihapus_admin' => true]);
 
         return redirect()->route('admin.peminjaman.index')
-            ->with('success', 'Data peminjaman berhasil dihapus.');
+            ->with('success', 'Data peminjaman berhasil dihapus dari daftar.');
     }
 
     // ==========================================
